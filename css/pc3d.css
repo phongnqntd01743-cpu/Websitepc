@@ -1,0 +1,398 @@
+/* ==========================================================================
+   PC3D - Styles cho trình xem 3D Thùng máy PC
+   ========================================================================== */
+
+.pc3d-showcase-card {
+  background: linear-gradient(180deg, #1c222b 0%, #151a22 100%);
+  border: 1px solid #2d3748;
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(56, 189, 248, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.pc3d-showcase-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0878f9, #38bdf8, #818cf8, transparent);
+  pointer-events: none;
+}
+
+.pc3d-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.pc3d-title-group h2 {
+  margin: 4px 0 2px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pc3d-title-group p {
+  margin: 0;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.pc3d-live-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #38bdf8;
+  text-transform: uppercase;
+}
+
+.pc3d-live-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: pc3dPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes pc3dPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.55; }
+}
+
+.pc3d-quick-specs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pc3d-spec-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.pc3d-spec-pill img {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
+
+.pc3d-spec-pill strong {
+  color: #f8fafc;
+}
+
+.pc3d-spec-pill.accent {
+  background: rgba(8, 120, 249, 0.2);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #7dd3fc;
+}
+
+/* Container chính của viewer */
+.v3d {
+  position: relative;
+  width: 100%;
+  height: 540px;
+  border-radius: 12px;
+  background: radial-gradient(ellipse at 50% 35%, #29303c 0%, #1e242d 65%, #151921 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  user-select: none;
+  box-shadow: inset 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.v3d:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  border: 0;
+}
+
+.v3d-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.v3d-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  outline: none;
+}
+
+/* HUD góc trên bên trái */
+.v3d-hud {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  pointer-events: none;
+}
+
+.v3d-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.v3d-badge i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #94a3b8;
+  transition: all 0.3s ease;
+}
+
+.v3d-badge.on {
+  border-color: rgba(34, 197, 94, 0.5);
+  color: #4ade80;
+}
+
+.v3d-badge.on i {
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+.v3d-badge.off i {
+  background: #64748b;
+}
+
+.v3d-badge.warn {
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+}
+
+.v3d-badge.warn i {
+  background: #f59e0b;
+  box-shadow: 0 0 10px #f59e0b;
+}
+
+.v3d-count {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #38bdf8;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Thanh công cụ góc trên bên phải */
+.v3d-toolbar {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  z-index: 10;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.v3d-toolbar button {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.v3d-toolbar button svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+
+.v3d-toolbar button:hover {
+  background: rgba(30, 58, 138, 0.6);
+  color: #38bdf8;
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(56, 189, 248, 0.25);
+}
+
+.v3d-toolbar button:hover svg {
+  transform: scale(1.1);
+}
+
+.v3d-toolbar button.on {
+  background: linear-gradient(135deg, rgba(8, 120, 249, 0.45), rgba(14, 165, 233, 0.35));
+  color: #38bdf8;
+  border-color: #0878f9;
+  box-shadow: 0 0 14px rgba(8, 120, 249, 0.4);
+}
+
+.v3d-toolbar button:active {
+  transform: translateY(0);
+}
+
+/* Tooltip khi rê chuột vào linh kiện */
+.v3d-tip {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 12px rgba(56, 189, 248, 0.2);
+  border-radius: 8px;
+  padding: 7px 12px;
+  max-width: 260px;
+}
+
+.v3d-tip.show {
+  opacity: 1;
+}
+
+.v3d-tip b {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #38bdf8;
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+.v3d-tip span {
+  display: block;
+  font-size: 12px;
+  color: #f8fafc;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Hint góc dưới */
+.v3d-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 8;
+  font-size: 11px;
+  font-weight: 500;
+  color: #94a3b8;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.v3d-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #94a3b8;
+  font-size: 13px;
+  padding: 24px;
+  text-align: center;
+}
+
+/* Hiệu ứng focus / highlight khi nhấn vào linh kiện trong 3D */
+.component-group.highlight-flash {
+  animation: groupFlash 1.6s ease-out;
+}
+
+@keyframes groupFlash {
+  0% { box-shadow: 0 0 0 3px #0878f9; background: #eff6ff; }
+  100% { box-shadow: none; background: transparent; }
+}
+
+[data-theme="dark"] .component-group.highlight-flash {
+  animation: groupFlashDark 1.6s ease-out;
+}
+
+@keyframes groupFlashDark {
+  0% { box-shadow: 0 0 0 3px #38bdf8; background: rgba(56, 189, 248, 0.12); }
+  100% { box-shadow: none; background: transparent; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .v3d {
+    height: 420px;
+  }
+  .pc3d-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .v3d {
+    height: 350px;
+  }
+  .v3d-toolbar button {
+    width: 34px;
+    height: 34px;
+  }
+  .v3d-hint {
+    display: none;
+  }
+  .pc3d-quick-specs {
+    display: none;
+  }
+}

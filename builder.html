@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PC Builder - PCForge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/builder.css">
+  <link rel="stylesheet" href="css/pc3d.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div id="toast-container"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="13.4 0.4 12.9 9.1 18.7 9.1 8.2 23.6 10.8 12.9 5.3 12.9"/></svg></span>
+        <span><strong>PCForge</strong><small>Build Your Dream PC</small></span>
+      </a>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Mở menu">☰</button>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html">Trang chủ</a>
+        <a href="products.html" class="nav-has-sub">Linh kiện <span class="nav-arrow">▾</span></a>
+        <a class="active" href="builder.html">PC Builder</a>
+        <a href="products.html?filter=sale">Khuyến mãi</a>
+        <a href="contact.html">Liên hệ</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-box">
+          <input id="globalSearch" type="search" placeholder="Tìm kiếm linh kiện, sản phẩm...">
+          <button id="globalSearchBtn" aria-label="Tìm kiếm">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Chuyển chế độ sáng/tối" title="Chuyển chế độ sáng/tối"><span class="theme-icon">🌙</span></button>
+        <a class="icon-btn account-btn" href="contact.html" aria-label="Tài khoản" title="Tài khoản">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <a class="cart-btn" href="cart.html" aria-label="Giỏ hàng">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span id="cartBadge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container page-main">
+    <div class="page-title">
+      <div>
+        <span class="section-kicker">PC BUILDER</span>
+        <h1>Xây dựng cấu hình của bạn</h1>
+        <p>Chọn linh kiện, xem thùng PC mô phỏng 3D thời gian thực và kiểm tra độ tương thích.</p>
+      </div>
+      <div class="builder-actions">
+        <button class="btn btn-secondary" id="saveBuild">Lưu cấu hình</button>
+        <button class="btn btn-outline" id="loadBuild">Tải cấu hình</button>
+      </div>
+    </div>
+
+    <!-- 3D PC Showcase Card -->
+    <section class="pc3d-showcase-card" id="pc3dSection">
+      <div class="pc3d-header">
+        <div class="pc3d-title-group">
+          <span class="pc3d-live-tag"><span class="pc3d-live-pulse"></span> 3D REALTIME SIMULATION</span>
+          <h2>Mô hình 3D Thùng máy & Linh kiện</h2>
+          <p>Tương tác 360°, tháo kính cường lực, quạt quay & LED ARGB đổi màu thời gian thực khi chọn linh kiện.</p>
+        </div>
+        <div class="pc3d-quick-specs" id="pc3dQuickSpecs"></div>
+      </div>
+      <div class="v3d" id="pc3dViewport"></div>
+    </section>
+
+    <div class="builder-layout">
+      <section class="component-picker">
+        <div class="picker-head">
+          <h2>Chọn linh kiện</h2>
+          <span id="pickerHint">Chọn một sản phẩm cho từng nhóm để tự động gắn vào thùng máy 3D</span>
+        </div>
+        <div id="componentSections"></div>
+      </section>
+
+      <aside class="build-summary">
+        <div class="summary-head">
+          <div>
+            <span class="section-kicker">YOUR BUILD</span>
+            <h2>Cấu hình của tôi</h2>
+          </div>
+          <span class="status-dot" id="buildStatusDot"></span>
+        </div>
+        <div id="selectedComponents"></div>
+        <div class="power-card">
+          <span>Công suất ước tính</span>
+          <strong id="estimatedPower">0W</strong>
+        </div>
+        <div class="summary-line">
+          <span>Số linh kiện</span>
+          <strong id="componentCount">0</strong>
+        </div>
+        <div class="summary-total">
+          <span>Tổng giá trị</span>
+          <strong id="buildTotal">0 ₫</strong>
+        </div>
+        <div id="compatibilityBox" class="compatibility-box neutral">Chưa có đủ dữ liệu để kiểm tra.</div>
+        <button class="btn btn-primary full" id="checkCompatibility">Kiểm tra tương thích</button>
+        <button class="btn btn-secondary full" id="addBuildToCart">Thêm cấu hình vào giỏ</button>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand footer-brand" href="index.html">
+          <span class="brand-mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="13.4 0.4 12.9 9.1 18.7 9.1 8.2 23.6 10.8 12.9 5.3 12.9"/></svg></span>
+          <span><strong>PCForge</strong><small>Build Your Dream PC</small></span>
+        </a>
+        <p>Nền tảng mua linh kiện và build PC trực tuyến.</p>
+      </div>
+      <div>
+        <h4>Khám phá</h4>
+        <a href="products.html">Linh kiện</a>
+        <a href="builder.html">PC Builder</a>
+        <a href="products.html?filter=sale">Khuyến mãi</a>
+      </div>
+      <div>
+        <h4>Hỗ trợ</h4>
+        <a href="contact.html">Liên hệ</a>
+        <a href="contact.html">Chính sách</a>
+        <a href="contact.html">Bảo hành</a>
+      </div>
+      <div>
+        <h4>Liên hệ</h4>
+        <p>support@pcforge.local</p>
+        <p>1900 6868</p>
+        <p>Đà Nẵng, Việt Nam</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 PCForge. Demo project cho Assignment JavaScript.</div>
+  </footer>
+
+  <script src="js/vendor/three.min.js"></script>
+  <script src="js/vendor/OrbitControls.js"></script>
+  <script src="js/pc3d.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/builder.js"></script>
+</body>
+</html>
